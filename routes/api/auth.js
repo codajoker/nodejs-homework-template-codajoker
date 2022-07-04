@@ -5,7 +5,9 @@ const {
   loginController,
   getCurrent,
   logOutController,
+  verifyEmail,
   subscriptionConroller,
+  resendEmail
 } = require("../../controller/auth");
 const { auth } = require("../../middlewares/auth");
 const { ctrlWrapper } = require("../../middlewares/ctrlWrapper");
@@ -23,6 +25,8 @@ router.post(
   validationRegister(joiSchema),
   ctrlWrapper(registerController)
 );
+router.get("/verify/:verificationToken", ctrlWrapper(verifyEmail));
+router.post("/verify", ctrlWrapper(resendEmail));
 router.post(
   "/login",
   validationRegister(joiSchema),
@@ -30,7 +34,6 @@ router.post(
 );
 router.get("/logout", auth, ctrlWrapper(logOutController));
 router.get("/current", auth, ctrlWrapper(getCurrent));
-
 router.patch(
   "",
   auth,

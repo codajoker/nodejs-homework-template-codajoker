@@ -16,7 +16,6 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use("/users", authRouter);
 app.use("/users", avatarRouter);
-
 app.use("/api/contacts", contactsRouter);
 
 app.use((req, res) => {
